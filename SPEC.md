@@ -1,6 +1,9 @@
 # Registered Accountable Entity (RAE)
 
-**Version 1.0.0** — 2026-09-18 — **Status: Draft for public critique.**
+**Version 1.0.1** — 2026-09-18 — **Status: Draft for public critique.**
+
+The key words MUST, MUST NOT, SHOULD, SHOULD NOT are to be interpreted as
+described in RFC 2119.
 
 This is an open specification. Issues and pull requests are welcome — see
 [CONTRIBUTING.md](CONTRIBUTING.md). If you implement RAE, cite the version you
@@ -42,7 +45,7 @@ concrete operationalization (see §6, Related work).
   as *provenance metadata* ("agent-influenced"), not as separate RAE
   attribution. Two RAEs is no RAE. Where the influencing agent's output was
   produced under a sponsorship, the provenance record MUST reference that
-  sponsorship record, or explicitly mark it unresolved. This reference is
+  sponsorship record, or explicitly mark it unresolved, where an unresolved marking is distinct from an absent reference. This reference is
   descriptive: it confers no accountability on the referenced sponsor for the
   influenced action, whose RAE remains the acting human alone. Provenance
   references are depth-1; deeper chains are resolved through the registry, not
@@ -71,7 +74,10 @@ concrete operationalization (see §6, Related work).
 
 A product, service, or process may claim to "implement RAE" only with an
 explicit assurance level — e.g. "implements RAE L1". Claims without a level are
-non-conformant.
+non-conformant. At every level, the RAE is a single natural person (N5)
+and never an agent (N2). An L0 claim asserts only the display criterion; it
+does not assert implementation of the RAE practice, whose attribution
+machinery (N1/N3/N4/N6) begins at L1.
 
 | Level | Minimum conformance criteria |
 |---|---|
@@ -79,7 +85,7 @@ non-conformant.
 | L1 (registered) | Organization-verified identity; a signing credential bound to authorization records; pre-attribution records (N1) naming the sponsorship or approval and its scope (N6); no-RAE handling per N3 (blocked or flagged, never silent); provenance carrying sponsorship references per N4. |
 | L2 (registered, verified) | Everything in L1, plus third-party-verified identity (KYC/eID-grade) and a tamper-evident registry; proof sufficient for independent reconstruction, per the Proof glossary entry. |
 
-Any UI or API surface that displays an RAE must state its level explicitly.
+Any UI or API surface that displays an RAE MUST state its level explicitly.
 Conformance is self-declared; this spec supplies the criteria against which a
 self-declaration can be independently judged.
 
@@ -107,7 +113,7 @@ self-declaration can be independently judged.
   a reasonable person would treat the action as co-determined.
 - **Sponsored / Approved** — *Sponsorship*: standing advance authorization of
   an agent or action class (subject to N6). *Approval*: specific authorization
-  of a particular action. Either establishes the RAE link; the record must
+  of a particular action. Either establishes the RAE link; the record MUST
   show which one covered a given action.
 - **Registered (the institution)** — Recorded in a registry that binds
   identity to authorization records so attribution outlives the runtime.
@@ -163,6 +169,9 @@ layer 2 rather than operating systems where layer 2 applies.
 
 ## Changelog
 
+- **1.0.1** (2026-09-18): one-pass review fixes — L0 conformance scope
+  (display-only, not implementation), N2/N5 conformance lead-in, RFC 2119
+  casing normalized, N4 unresolved-vs-absent made explicit.
 - **1.0.0** (2026-09-18): Initial public release. Incorporates the converged
   definition (v3), normative clauses N1–N6 (including the sponsorship-
   granularity clause N6 and the amended N4 provenance-reference clause),
