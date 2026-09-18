@@ -14,20 +14,36 @@ only as strong as the scrutiny it survives.
 
 ## Signed-commit policy
 
-All commits to this repository must be signed. This is deliberate: the spec's
-own maintenance history is a live conformance demonstration of its §1 claim —
-every change has a committer, a signature, and a timestamp, at L0 (declared)
-or better. Unsigned commits will not be merged.
+All commits to this repository must be signed. This is deliberate: the project
+practices the attribution discipline the spec advocates, at the build layer —
+every change has a committer, a signature, and a timestamp. A signed commit
+sits between L0 (unsigned claim) and L1 (org-verified identity); it is not
+conformance, but it is the same discipline applied to the one layer the project
+controls. Unsigned commits will not be merged.
+
+## Governance
+
+The specification is maintained by its named editors (see SPEC.md). Editors
+decide what lands; objections are resolved by discussion in issues, and a
+sustained objection from an implementer is treated as a blocking review.
+Neutral stewardship — transfer to a foundation or standards body — is a future
+option, not ruled out. The change discipline below defines what a given change
+touches; the editors decide whether it lands.
 
 ## Change discipline
 
 - Normative clauses (§2), assurance levels (§3), and conformance criteria (§4)
   are the normative core. Changes there bump the minor version and are
   recorded in the changelog.
-- Glossary (§5), related work (§6), and FAQ (§7) are explanatory; changes there
-  bump the patch version.
+- Glossary (§5), related work (§6), FAQ (§7), and IPR (§8) are explanatory;
+  changes there bump the patch version.
 
 ## Versioning
 
 The spec follows semver. A conformance claim must cite a specific version
-(e.g. "implements RAE 1.0 L1").
+(e.g. "implements RAE 1.0.2 L1, enforcement tier").
+
+## IPR
+
+No patents are asserted over implementations of this practice, and none are
+planned. See SPEC.md §8.
