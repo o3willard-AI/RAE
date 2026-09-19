@@ -243,8 +243,7 @@ identity). The signed-commit policy sits between L0 and L1.
 
 This specification is licensed under Apache-2.0. No patents are asserted over
 implementations of this practice, and none are planned. The specification and
-its reference implementations are published openly in part to establish prior
-art.
+its reference implementations are published openly.
 
 ## Changelog
 
