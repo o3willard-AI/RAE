@@ -11,7 +11,7 @@ against.
 
 ## Why this exists
 
-Automation transfers *execution*, never *answerability*. RAE is a vocabulary
+Automation transfers *execution*, never *responsibility*. RAE is a vocabulary
 for making the accountable human explicit — with proof — rather than letting
 accountability evaporate into "the AI did it."
 
