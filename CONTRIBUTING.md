@@ -40,8 +40,9 @@ touches; the editors decide whether it lands.
 
 ## Versioning
 
-The spec follows semver. A conformance claim must cite a specific version
-(e.g. "implements RAE 1.0.2 L1, enforcement tier").
+The spec follows semver. A conformance claim uses the canonical form from SPEC.md §4 —
+"implements RAE <version> <level>, <tier> tier" (e.g.
+"implements RAE 1.0.3 L1, enforcement tier").
 
 ## IPR
 

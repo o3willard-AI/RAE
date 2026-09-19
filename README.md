@@ -20,8 +20,9 @@ accountability evaporate into "the AI did it."
 - Read the spec: [SPEC.md](SPEC.md)
 - Implement it, cite the version, and tell us where it falls short — issues
   and pull requests are welcome: [CONTRIBUTING.md](CONTRIBUTING.md)
-- This spec is versioned. Conformance claims must state a level ("implements
-  RAE L1"); an unleveled claim is non-conformant.
+- This spec is versioned. Conformance claims use the canonical form from
+  SPEC.md §4 — "implements RAE <version> <level>, <tier> tier"; an unleveled
+  claim is non-conformant.
 
 ## Related work
 

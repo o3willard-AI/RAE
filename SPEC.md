@@ -1,6 +1,8 @@
 # Registered Accountable Entity (RAE)
 
-**Version 1.0.2** — 2026-09-18 — **Status: Draft for public critique.**
+**Version 1.0.3** — 2026-09-19 — **Status: Draft for public critique.**
+
+**Editors:** Stephen Blankenship <stephen.blankenship@gmail.com>
 
 This is an open specification. Issues and pull requests are welcome — see
 [CONTRIBUTING.md](CONTRIBUTING.md). If you implement RAE, cite the version you
@@ -72,13 +74,27 @@ concrete operationalization (see §6, Related work).
   them remain their responsibility. Standing sponsorships SHOULD carry an
   expiry, and a system MUST define what happens to in-flight actions when a
   sponsorship is revoked mid-execution (attributed per the record at execution
-  time).
+  time). A standing sponsorship MAY be transferred to a successor RAE; the
+  transfer is a new pre-attribution event under N1, recorded as its own
+  registry event. The successor sponsors prospectively and does not inherit
+  responsibility for past actions, which remain with the original sponsor.
 - **N8 — Agent-to-agent delegation.** An action taken by an agent invoked by
   another agent is attributable to the RAE whose sponsorship covers the
-  invoking agent, unless the invoked agent acts under its own sponsorship. The
-  covering sponsorship's scope (N6) governs: a delegated action the sponsor
-  could not have anticipated is unattributed under N3. Attribution resolves to
-  the nearest covering sponsorship and never vanishes into the chain.
+  invoking agent. The invoked agent's own sponsorship displaces the invoker's
+  RAE only if that sponsorship's scope covers being invoked by another agent,
+  or by that class of invoker; otherwise attribution stays with the invoking
+  agent's RAE. Whichever sponsorship governs, its scope (N6) applies: a
+  delegated action the governing sponsor could not have anticipated is
+  unattributed under N3. If the nearest covering sponsorship sits in a
+  registry the executing system cannot read, the action is unattributed under
+  N3 (mirroring N4's unresolvable case). Attribution resolves to the nearest
+  covering sponsorship and never vanishes into the chain.
+
+**On judgment-based tests.** N6b's "narrow enough to be meaningful" and N8's
+"could not have anticipated" are deliberately judgment-based tests. They are
+applied at registry-time by the deploying organization and assessed by a human
+reviewer; they are not machine-checkable, and that is intentional — they sit
+where a human can actually apply them, not in the runtime path.
 
 ## 3. Assurance levels
 
@@ -92,28 +108,41 @@ concrete operationalization (see §6, Related work).
 
 A product, service, or process may claim to **display an RAE at L0** (declared,
 unverified) — the display-only claim — or to **implement RAE** at L1 or L2, with
-an explicit enforcement tier ("implements RAE L1, enforcement tier"). L0 never
-takes the verb *implement*: it asserts only the display criterion, not the RAE
-practice, whose attribution machinery (N1/N3/N4/N6/N7/N8) begins at L1. Claims
-without a level are non-conformant. At every level, the RAE is a single natural
-person (N5) and never an agent (N2).
+an explicit enforcement tier. The canonical claim form is:
 
-A conformant implementation MUST publish a **conformance statement** recording:
-the spec version, the claimed level, the enforcement tier (N3), the
+> implements RAE `<version>` `<level>`, `<tier>` tier
+
+for example "implements RAE 1.0.3 L1, enforcement tier". L0 never takes the
+verb *implement*; its only conformant form is "displays an RAE at L0 (declared,
+unverified)". Claims without a level are non-conformant. At every level, the
+RAE is a single natural person (N5) and never an agent (N2).
+
+A conformant implementation (L1 or L2) MUST publish a **conformance statement**
+recording: the spec version, the claimed level, the enforcement tier (N3), the
 clause-by-clause status (enforced / informational / not applicable), and the
-location of its proof records. A claim without a published conformance
-statement is not independently judgeable.
+location of its proof records. An L0 display is not an implementation and
+publishes no statement; it states its level in the display itself. A claim
+without a published conformance statement is not independently judgeable.
+
+The conformance statement MUST be published at a conventional, discoverable
+location — a `RAE-CONFORMANCE.md` file at the repository root, or a well-known
+URL path — and SHOULD be machine-readable (JSON or YAML carrying the five
+fields above). The per-clause status is constrained: "not applicable" is
+reserved for architectural inapplicability (for example, N8 in a system with no
+agent-to-agent delegation), never for a clause the implementer chose not to
+build; and the per-clause status MUST be consistent with the declared tier (a
+system declaring the enforcement tier cannot mark N3 informational).
 
 | Level | Minimum criteria |
 |---|---|
-| L0 (declared) — display only | Displays the declared identity of the accountable person with the explicit label "declared, unverified (L0)"; makes no claim of verification or registration. |
+| L0 (declared) — display only | Displays the declared identity of the accountable person with the explicit label "declared, unverified (L0)"; makes no claim of verification or registration; publishes no conformance statement. |
 | L1 (registered) | Organization-verified identity; a signing credential bound to authorization records; pre-attribution records (N1) naming the sponsorship or approval and its scope (N6); no-RAE handling per N3 with a declared tier; provenance carrying sponsorship references per N4; a published conformance statement. |
 | L2 (registered, verified) | Everything in L1, plus third-party-verified identity (KYC/eID-grade) and a tamper-evident registry verifiable by an independent party, per the Proof glossary test. |
 
-Any UI or API surface that displays an RAE MUST state its level and tier
-explicitly. Conformance is self-declared; this spec supplies the criteria — and
-requires the statement — against which a self-declaration can be independently
-judged.
+Any UI or API surface that displays an RAE MUST state its level, and its tier
+where the level is L1 or above. Conformance is self-declared; this spec
+supplies the criteria — and requires the statement — against which a
+self-declaration can be independently judged.
 
 ## 5. Glossary
 
@@ -219,14 +248,20 @@ art.
 
 ## Changelog
 
+- **1.0.3** (2026-09-19): third audit round — tier requirement excepts L0
+  (Problem A); editors named (Problem B); N7 succession added (Problem C); N8
+  delegation-acceptance and unresolvable case added (Gaps D, E); conformance
+  statement given a location and machine-readable form (Gap F); "not
+  applicable" constrained and tied to tier (Gap G); L0 exempted from the
+  conformance statement (Gap H); canonical claim string unified (Gap I);
+  judgment-based tests acknowledged (Gap J).
 - **1.0.2** (2026-09-18): second audit round — verb split by level in §4
   (display@L0 vs implement@L1/L2), enforcement tier as a declared property (N3,
   §4), conformance-statement artifact (§4), N6 split into N6a (runtime
-  scope-match) and N6b (registry-time breadth), new N7 (sponsorship lifecycle:
-  revocation/expiry/succession) and N8 (agent-to-agent delegation), L2 registry
-  tied to the Proof test, unresolvable-vs-unresolved in N4, four prior-art
-  additions (§6), dogfooding tightened and signed-commit level corrected (§7),
-  IPR statement (§8).
+  scope-match) and N6b (registry-time breadth), new N7 (sponsorship lifecycle)
+  and N8 (agent-to-agent delegation), L2 registry tied to the Proof test,
+  unresolvable-vs-unresolved in N4, four prior-art additions (§6), dogfooding
+  tightened and signed-commit level corrected (§7), IPR statement (§8).
 - **1.0.1** (2026-09-18): one-pass review (hermes-ox-chap) — L0 conformance
   scope clarified (display-only, not implementation), N2/N5 conformance
   lead-in added, RFC 2119 casing normalized, N4 unresolved-vs-absent made
