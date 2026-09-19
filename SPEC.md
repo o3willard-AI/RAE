@@ -167,7 +167,7 @@ self-declaration can be independently judged.
   agent output changed the action's target, nature, or consequence, such that
   a reasonable person would treat the action as co-determined.
 - **Sponsored / Approved** — *Sponsorship*: standing advance authorization of
-  an agent or action class (subject to N6 and N7). *Approval*: specific
+  an agent or action class (subject to N6a/N6b and N7). *Approval*: specific
   authorization of a particular action. Either establishes the RAE link; the
   record MUST show which one covered a given action.
 - **Registered (the institution)** — Recorded in a registry that binds
