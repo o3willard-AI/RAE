@@ -32,11 +32,12 @@ touches; the editors decide whether it lands.
 
 ## Change discipline
 
-- Normative clauses (§2), assurance levels (§3), and conformance criteria (§4)
-  are the normative core. Changes there bump the minor version and are
-  recorded in the changelog.
-- Glossary (§5), related work (§6), FAQ (§7), and IPR (§8) are explanatory;
-  changes there bump the patch version.
+While the spec is **Draft for public critique** (see SPEC.md), every release is
+patch-level regardless of normative content; the changelog is authoritative for
+what changed, and releases that carried breaking normative changes are flagged
+there. Once the spec reaches 1.0 stable, semver applies: normative changes
+(clauses §2, levels §3, conformance §4) bump the minor version, and explanatory
+changes (glossary §5, related work §6, FAQ §7, IPR §8) bump the patch version.
 
 ## Versioning
 

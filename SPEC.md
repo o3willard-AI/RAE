@@ -1,6 +1,6 @@
 # Registered Accountable Entity (RAE)
 
-**Version 1.0.3** — 2026-09-19 — **Status: Draft for public critique.**
+**Version 1.0.4** — 2026-09-19 — **Status: Draft for public critique.**
 
 **Editors:** Stephen Blankenship <stephen.blankenship@gmail.com>
 
@@ -83,7 +83,7 @@ concrete operationalization (see §6, Related work).
   invoking agent. The invoked agent's own sponsorship displaces the invoker's
   RAE only if that sponsorship's scope covers being invoked by another agent,
   or by that class of invoker; otherwise attribution stays with the invoking
-  agent's RAE. Whichever sponsorship governs, its scope (N6) applies: a
+  agent's RAE. Whichever sponsorship governs, its scope (N6a/N6b) applies: a
   delegated action the governing sponsor could not have anticipated is
   unattributed under N3. If the nearest covering sponsorship sits in a
   registry the executing system cannot read, the action is unattributed under
@@ -114,7 +114,9 @@ an explicit enforcement tier. The canonical claim form is:
 
 for example "implements RAE 1.0.3 L1, enforcement tier". L0 never takes the
 verb *implement*; its only conformant form is "displays an RAE at L0 (declared,
-unverified)". Claims without a level are non-conformant. At every level, the
+unverified)". Claims without a level are non-conformant. An L0 claim asserts only the
+display criterion, not the RAE practice, whose attribution machinery (N1,
+N3, N4, N6a/N6b, N7, N8) begins at L1. At every level, the
 RAE is a single natural person (N5) and never an agent (N2).
 
 A conformant implementation (L1 or L2) MUST publish a **conformance statement**
@@ -125,9 +127,7 @@ publishes no statement; it states its level in the display itself. A claim
 without a published conformance statement is not independently judgeable.
 
 The conformance statement MUST be published at a conventional, discoverable
-location — a `RAE-CONFORMANCE.md` file at the repository root, or a well-known
-URL path — and SHOULD be machine-readable (JSON or YAML carrying the five
-fields above). The per-clause status is constrained: "not applicable" is
+location — a `RAE-CONFORMANCE.md` file at the repository root, or a `/.well-known/rae-conformance` resource on a domain the implementer controls — and SHOULD be machine-readable (JSON or YAML with keys `spec_version`, `level`, `tier`, `clause_status`, `proof_location`). The per-clause status is constrained: "not applicable" is
 reserved for architectural inapplicability (for example, N8 in a system with no
 agent-to-agent delegation), never for a clause the implementer chose not to
 build; and the per-clause status MUST be consistent with the declared tier (a
@@ -136,7 +136,7 @@ system declaring the enforcement tier cannot mark N3 informational).
 | Level | Minimum criteria |
 |---|---|
 | L0 (declared) — display only | Displays the declared identity of the accountable person with the explicit label "declared, unverified (L0)"; makes no claim of verification or registration; publishes no conformance statement. |
-| L1 (registered) | Organization-verified identity; a signing credential bound to authorization records; pre-attribution records (N1) naming the sponsorship or approval and its scope (N6); no-RAE handling per N3 with a declared tier; provenance carrying sponsorship references per N4; a published conformance statement. |
+| L1 (registered) | Organization-verified identity; a signing credential bound to authorization records; pre-attribution records (N1) naming the sponsorship or approval and its scope (N6a/N6b); no-RAE handling per N3 with a declared tier; provenance carrying sponsorship references per N4; a published conformance statement. |
 | L2 (registered, verified) | Everything in L1, plus third-party-verified identity (KYC/eID-grade) and a tamper-evident registry verifiable by an independent party, per the Proof glossary test. |
 
 Any UI or API surface that displays an RAE MUST state its level, and its tier
@@ -248,6 +248,11 @@ art.
 
 ## Changelog
 
+- **1.0.4** (2026-09-19): fourth audit round — restored the L0
+  machinery-begins-at-L1 principle in §4, fixed two dangling (N6)
+  references, named the conformance-statement field keys, resolved the
+  conformance location to a /.well-known/ path, and corrected the
+  draft-phase versioning rule.
 - **1.0.3** (2026-09-19): third audit round — tier requirement excepts L0
   (Problem A); editors named (Problem B); N7 succession added (Problem C); N8
   delegation-acceptance and unresolvable case added (Gaps D, E); conformance
