@@ -2,7 +2,7 @@
 
 **Version 1.0.4** — 2026-09-19 — **Status: Draft for public critique.**
 
-**Editors:** Stephen Blankenship <stephen.blankenship@gmail.com>
+**Editors:** Stephen Blankenship ([@o3willard-AI](https://github.com/o3willard-AI))
 
 This is an open specification. Issues and pull requests are welcome — see
 [CONTRIBUTING.md](CONTRIBUTING.md). If you implement RAE, cite the version you
