@@ -5,6 +5,35 @@ Status of RAE adoption across `o3willard-AI`. Tier-1 repos are adopted
 file tracks the deferred Tier-2 and Tier-3 considerations, plus one
 reclassification from the 2026-09 deep-dive review.
 
+## Tier-1 — adopted (operator/sponsor identity + attribution + L0 conformance statement)
+
+- **PairAdmin** — terminal + AI assistant. Displays an RAE at L0 (declared,
+  unverified) via the logged-in OS account in the Settings Security tab
+  (`RAE_L0_SUFFIX`, hardcoded so the label can't drift); attribution is
+  structural via the assistant's hard execution boundary (the model produces
+  text only; every action is operator-initiated). Claim discipline in
+  `docs/security/rae.md`, SECURITY.md, and `docs/MESSAGING.md` §2.10/§3;
+  voluntary L0 `RAE-CONFORMANCE.md` at the repo root. **Distinct from the rest
+  of this list:** PairAdmin has a planned *paid enterprise tier* whose stated
+  goal is to reach **RAE L1** (org-verified identity via SSO + an operator
+  signing credential + sponsorship/scope records + a published L1 conformance
+  statement). That L1 work is tracked in the separate private
+  `PairAdmin-Enterprise` repo, not here; the open-source build's claim stays
+  L0 and is complete on its own (not a crippled preview). Recorded so the L0
+  (open) vs L1 (enterprise) split for this one product is visible in the
+  portfolio view.
+- **Chaperone** — credential broker. Sponsor bound at enrollment, propagated
+  to the audit chain; L0 conformance statement.
+- **Machina-Parousia** — agent presence server. Human sponsor via invite
+  (`sponsor_id`/`sponsor_contact`) → account → action records; L0 conformance
+  statement.
+- **MR-Krabs** — multi-tier orchestrator. Operator who submits the spec and
+  reviews output is the RAE; L0 conformance statement, with explicit
+  model-tier-vs-assurance-level disambiguation.
+- **linus-deployment-specialist** — infrastructure automation. Operator
+  (env/`$USER`) attributable for provision/destroy including `FORCE=true`;
+  L0 conformance statement.
+
 ## Reclassification
 
 **Token-Jet: Tier-3 → Tier-1.** Reclassified after a deep dive into the repo.
