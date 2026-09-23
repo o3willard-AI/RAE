@@ -1,72 +1,60 @@
 # RAE Adoption Backlog
 
-Status of RAE adoption across `o3willard-AI`. Tier-1 repos are adopted
-(operator/sponsor identity + attribution + an L0 conformance statement). This
-file tracks the deferred Tier-2 and Tier-3 considerations, plus one
-reclassification from the 2026-09 deep-dive review.
+Where RAE is core, advisory, or peripheral, expressed as the *types* of products
+and projects the standard is valuable for — deliberately not a named list of
+any particular repositories, so it stays meaningful as the standard spreads.
+Tier-1 types are those where RAE is core (operator/sponsor identity +
+attribution + an L0 conformance statement); Tier-2 and Tier-3 cover where RAE
+is advisory or peripheral.
 
-## Tier-1 — adopted (operator/sponsor identity + attribution + L0 conformance statement)
+## Tier 1 — RAE is core
 
-- **PairAdmin** — terminal + AI assistant. Displays an RAE at L0 (declared,
-  unverified) via the logged-in OS account in the Settings Security tab
-  (`RAE_L0_SUFFIX`, hardcoded so the label can't drift); attribution is
-  structural via the assistant's hard execution boundary (the model produces
-  text only; every action is operator-initiated). Claim discipline in
-  `docs/security/rae.md`, SECURITY.md, and `docs/MESSAGING.md` §2.10/§3;
-  voluntary L0 `RAE-CONFORMANCE.md` at the repo root. **Distinct from the rest
-  of this list:** PairAdmin has a planned *paid enterprise tier* whose stated
-  goal is to reach **RAE L1** (org-verified identity via SSO + an operator
-  signing credential + sponsorship/scope records + a published L1 conformance
-  statement). That L1 work is tracked in the separate private
-  `PairAdmin-Enterprise` repo, not here; the open-source build's claim stays
-  L0 and is complete on its own (not a crippled preview). Recorded so the L0
-  (open) vs L1 (enterprise) split for this one product is visible in the
-  portfolio view.
-- **Chaperone** — credential broker. Sponsor bound at enrollment, propagated
-  to the audit chain; L0 conformance statement.
-- **Machina-Parousia** — agent presence server. Human sponsor via invite
-  (`sponsor_id`/`sponsor_contact`) → account → action records; L0 conformance
-  statement.
-- **MR-Krabs** — multi-tier orchestrator. Operator who submits the spec and
-  reviews output is the RAE; L0 conformance statement, with explicit
-  model-tier-vs-assurance-level disambiguation.
-- **linus-deployment-specialist** — infrastructure automation. Operator
-  (env/`$USER`) attributable for provision/destroy including `FORCE=true`;
-  L0 conformance statement.
+Product and project types that should carry operator/sponsor identity,
+attribution, and a conformance statement before they ship:
 
-## Reclassification
+- **AI-assisted desktop and terminal tools.** A human-in-the-loop assistant with
+  a hard execution boundary (the model produces text only; every consequential
+  action is operator-initiated) displays an RAE at L0 — a declared, unverified
+  identity resolved from the logged-in OS account, with a fixed label that
+  cannot drift. The free build claims L0 and is complete on its own; a paid
+  tier may separately commit to L1 (org-verified identity, an operator signing
+  credential, sponsorship/scope records, and a published L1 conformance
+  statement). That L1 work lives in its own distribution — the L0 build is not
+  a crippled preview, and the two levels are tracked separately so the split is
+  visible.
+- **Credential brokers and auth gateways.** A sponsor is bound at enrollment and
+  propagated to the audit chain; the broker records *who* authorized *which*
+  credential for *what* action.
+- **Agent presence and orchestration servers.** Human sponsors are established
+  by invite and linked to accounts and their action records.
+- **Multi-tier agent orchestrators.** The operator who submits the work and
+  reviews the output is the RAE; the product explicitly disambiguates the
+  model's capability tier from the RAE assurance level.
+- **Infrastructure automation.** The operator is attributable for every
+  provision and destroy action, including forced/destructive operations.
 
-**Token-Jet: Tier-3 → Tier-1.** Reclassified after a deep dive into the repo.
-Token-Jet's install (`scripts/install-local.sh`) does not merely serve local
-inference — it instantiates a **full working coding agent** (PI) with
-pre-configured tooling:
+A recurring reason to treat something as Tier 1 rather than peripheral: a tool
+that *looks* like an installer or local utility but actually instantiates a
+full, network-reachable autonomous agent — with irreversible actions (network
+disablement, wiping stored credentials) and no recorded accountable human. A
+single install command producing an autonomous agent with no attribution is
+the exact state RAE exists to close; anything matching that pattern needs the
+Tier-1 treatment (operator identity + attribution + conformance) regardless of
+how modest its surface appears.
 
-- web search + URL fetch (`jetson-provider.ts`, `ddg-search`)
-- Wi-Fi management including **irreversible actions**: `wifi_off` / `air_gap`
-  disables the radio **and wipes all saved Wi-Fi profiles** (`wifi-manager.ts`)
-- model switching and code generation
-- a browser UI (`pi-web`) bound to `0.0.0.0:30141`, auto-started on boot
+## Tier 2 — RAE is advisory
 
-No operator / accountability / attribution concept exists anywhere in the repo.
-A single install command produces an autonomous, network-reachable agent with
-irreversible tools and no recorded accountable human — the exact state RAE
-exists to close. **Needs the same Tier-1 treatment as Chaperone, Machina-Parousia,
-MR-Krabs, and linus-deployment-specialist** (operator identity + attribution +
-conformance), scheduled once current Tier-1 product work settles.
+- **Output-shaping / influence tools.** They shape what an agent produces
+  (RAE N4, influenced actions) but take no direct destructive action — a natural
+  N4 conformance note when revisited.
+- **Observation and monitoring tools.** They watch agent fleets rather than act,
+  so attribution is second-order.
 
-## Tier-2 — relevant but advisory / non-destructive (deferred)
+## Tier 3 — RAE is peripheral
 
-- **Prism** — shapes agent output (RAE N4, influenced actions). Lower stakes
-  (no direct destructive action); a natural N4 conformance note when revisited.
-- **Spindle** — observes agent fleets rather than acting, so attribution is
-  second-order. Deferred.
-- **CINC-Fleet-Chaos-Creator** — lab-scoped chaos/QA demo, never production;
-  attribution is moot for an isolated lab. Deferred.
-
-## Tier-3 — peripheral (deferred)
-
-- **SSSonector** — cross-platform installers for a network daemon; not agentic,
-  no accountability gap.
-- **Lieutenant-Underwood** — Python utility; no agent instantiation.
-- **hermes-agent-backup** — shell backup scripts; not agentic.
-- **mrkrabs-challenge-1/2/3** — challenge/eval repos; not running agents.
+- **Installers and cross-platform packaging.** Not agentic; no accountability
+  gap.
+- **Utility scripts and libraries.** No agent instantiation.
+- **Backup and ops scripts.** Not agentic.
+- **Challenge and evaluation repositories.** Benchmarks and evals, not running
+  agents.
