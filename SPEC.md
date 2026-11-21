@@ -112,7 +112,7 @@ an explicit enforcement tier. The canonical claim form is:
 
 > implements RAE `<version>` `<level>`, `<tier>` tier
 
-for example "implements RAE 1.0.3 L1, enforcement tier". L0 never takes the
+for example "implements RAE 1.0.4 L1, enforcement tier". L0 never takes the
 verb *implement*; its only conformant form is "displays an RAE at L0 (declared,
 unverified)". Claims without a level are non-conformant. An L0 claim asserts only the
 display criterion, not the RAE practice, whose attribution machinery (N1,
